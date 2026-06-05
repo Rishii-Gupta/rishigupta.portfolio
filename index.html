@@ -37,8 +37,13 @@
         </div>
     </nav>
 
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
     <!-- ═══════════ LANDING ═══════════ -->
     <section id="landing">
+        <canvas id="particle-canvas"></canvas>
         <div class="container animate-on-scroll">
             <p class="landing-logo fade-in-up" style="font-family:var(--font-heading);font-size:2.5rem;color:var(--color-gold);font-weight:700;letter-spacing:4px;margin-bottom:10px;">RG</p>
             <h1 class="landing-name fade-in-up" style="--delay: 0.1s">Rishi Gupta</h1>
@@ -245,11 +250,15 @@
 
                 <!-- Project 1 -->
                 <div class="project-card animate-on-scroll">
-                    <div class="project-card-left blur-sharp" style="background-image:linear-gradient(rgba(26,26,26,0.82),rgba(26,26,26,0.88)),url('project_cover_image/spiritapp.png');background-size:cover;background-position:center;">
+                    <div class="project-card-left blur-sharp">
+                        <div class="proj-cover-wrapper">
+                            <img src="project_cover_image/spiritapp.png" alt="Spirit App Cover" class="proj-cover-img" loading="lazy">
+                        </div>
                         <span class="project-number">01</span>
                         <h3>Spirit App</h3>
                         <p class="project-subtitle">Mobile Application (Flutter)</p>
                         <p class="project-subtitle">Oct 2025 – Nov 2025</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.spiritiitg.spirit" target="_blank" rel="noopener noreferrer" class="proj-link"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg> Play Store</a>
                     </div>
                     <div class="project-card-right fade-in-up" style="--delay: 0.3s">
                         <p>
@@ -288,11 +297,15 @@
 
                 <!-- Project 2 -->
                 <div class="project-card animate-on-scroll">
-                    <div class="project-card-left blur-sharp" style="background-image:linear-gradient(rgba(26,26,26,0.82),rgba(26,26,26,0.88)),url('project_cover_image/madcow.png');background-size:cover;background-position:center;">
+                    <div class="project-card-left blur-sharp">
+                        <div class="proj-cover-wrapper">
+                            <img src="project_cover_image/madcow.png" alt="MadCow Disease Cover" class="proj-cover-img" loading="lazy">
+                        </div>
                         <span class="project-number">02</span>
                         <h3>MadCow Disease</h3>
                         <p class="project-subtitle">3D FPS PC Game (Godot Engine)</p>
                         <p class="project-subtitle">June 2025 – Aug 2025</p>
+                        <a href="https://drive.google.com/drive/folders/1AMEvs8gQC6nOkloVTxJVbO3-MkHrx-IQ" target="_blank" rel="noopener noreferrer" class="proj-link"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg> Project Files</a>
                     </div>
                     <div class="project-card-right fade-in-up" style="--delay: 0.3s">
                         <p>
@@ -329,11 +342,15 @@
 
                 <!-- Project 3 -->
                 <div class="project-card animate-on-scroll">
-                    <div class="project-card-left blur-sharp" style="background-image:linear-gradient(rgba(26,26,26,0.82),rgba(26,26,26,0.88)),url('project_cover_image/failsafe.png');background-size:cover;background-position:center;">
+                    <div class="project-card-left blur-sharp">
+                        <div class="proj-cover-wrapper">
+                            <img src="project_cover_image/failsafe.png" alt="FailSafe Cover" class="proj-cover-img" loading="lazy">
+                        </div>
                         <span class="project-number">03</span>
                         <h3>FailSafe</h3>
                         <p class="project-subtitle">Full-Stack AI/ML Web Application</p>
                         <p class="project-subtitle">Apr 2026</p>
+                        <a href="https://github.com/Rishii-Gupta/failsafe" target="_blank" rel="noopener noreferrer" class="proj-link"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
                     </div>
                     <div class="project-card-right fade-in-up" style="--delay: 0.3s">
                         <p>
@@ -380,11 +397,15 @@
 
                 <!-- Project 4 -->
                 <div class="project-card animate-on-scroll">
-                    <div class="project-card-left blur-sharp" style="background-image:linear-gradient(rgba(26,26,26,0.82),rgba(26,26,26,0.88)),url('project_cover_image/deusexmachina.png');background-size:cover;background-position:center;">
+                    <div class="project-card-left blur-sharp">
+                        <div class="proj-cover-wrapper">
+                            <img src="project_cover_image/deusexmachina.png" alt="Deus Ex Machina Cover" class="proj-cover-img" loading="lazy">
+                        </div>
                         <span class="project-number">04</span>
                         <h3>Deus Ex Machina</h3>
                         <p class="project-subtitle">2D Puzzle Platformer (Godot Engine)</p>
                         <p class="project-subtitle">Dec 2025</p>
+                        <a href="https://gdes.vercel.app/play/deus-ex-machina" target="_blank" rel="noopener noreferrer" class="proj-link"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg> Play Online</a>
                     </div>
                     <div class="project-card-right fade-in-up" style="--delay: 0.3s">
                         <p>

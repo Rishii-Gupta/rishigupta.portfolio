@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.08, rootMargin: '0px 0px -80px 0px' }
     );
 
     animatedElements.forEach((el) => scrollObserver.observe(el));
@@ -477,7 +477,155 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* -----------------------------------------------------------------------
-     10. INITIALISE EVERYTHING
+     10. PARTICLE CANVAS – Landing Section
+     Fine gold particles that drift and react to cursor movement.
+     ----------------------------------------------------------------------- */
+  const initParticles = () => {
+    const canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const landing = document.getElementById('landing');
+
+    let width, height;
+    let mouseX = -9999, mouseY = -9999;
+    const PARTICLE_COUNT = 80;
+    const CONNECTION_DIST = 120;
+    const MOUSE_RADIUS = 150;
+    const particles = [];
+
+    const resize = () => {
+      width = landing.offsetWidth;
+      height = landing.offsetHeight;
+      canvas.width = width;
+      canvas.height = height;
+    };
+    resize();
+    window.addEventListener('resize', debounce(resize, 100));
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.35;
+        this.vy = (Math.random() - 0.5) * 0.35;
+        this.r = Math.random() * 1.8 + 0.6;
+        this.alpha = Math.random() * 0.4 + 0.15;
+      }
+      update() {
+        // Mouse repulsion
+        const dx = this.x - mouseX;
+        const dy = this.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_RADIUS && dist > 0) {
+          const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.8;
+          this.vx += (dx / dist) * force;
+          this.vy += (dy / dist) * force;
+        }
+        // Damping
+        this.vx *= 0.98;
+        this.vy *= 0.98;
+        this.x += this.vx;
+        this.y += this.vy;
+        // Wrap
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(200, 169, 110, ${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+    const drawConnections = () => {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECTION_DIST) {
+            const alpha = (1 - dist / CONNECTION_DIST) * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(200, 169, 110, ${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+    };
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      drawConnections();
+      requestAnimationFrame(animate);
+    };
+    animate();
+
+    // Track mouse relative to landing section
+    landing.addEventListener('mousemove', (e) => {
+      const rect = landing.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
+    landing.addEventListener('mouseleave', () => {
+      mouseX = -9999;
+      mouseY = -9999;
+    });
+  };
+
+  /* -----------------------------------------------------------------------
+     11. CUSTOM CURSOR
+     A small dot + outer ring that follows the mouse with trailing lag.
+     Expands on interactive element hover.
+     ----------------------------------------------------------------------- */
+  const initCustomCursor = () => {
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    if (!dot || !ring || window.matchMedia('(max-width: 768px)').matches) return;
+
+    let mx = 0, my = 0; // actual mouse
+    let rx = 0, ry = 0; // ring position (lagged)
+
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+      dot.style.left = `${mx}px`;
+      dot.style.top = `${my}px`;
+    });
+
+    const lagRing = () => {
+      rx += (mx - rx) * 0.15;
+      ry += (my - ry) * 0.15;
+      ring.style.left = `${rx}px`;
+      ring.style.top = `${ry}px`;
+      requestAnimationFrame(lagRing);
+    };
+    lagRing();
+
+    // Hover detection
+    const interactiveSelector = 'a, button, .btn-cta, .btn-send, .proj-link, .tech-pill, .nav-links a, .hamburger, input, textarea, .cert-card, .social-icons a';
+    document.querySelectorAll(interactiveSelector).forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        dot.classList.add('hovering');
+        ring.classList.add('hovering');
+      });
+      el.addEventListener('mouseleave', () => {
+        dot.classList.remove('hovering');
+        ring.classList.remove('hovering');
+      });
+    });
+  };
+
+  /* -----------------------------------------------------------------------
+     12. INITIALISE EVERYTHING
      ----------------------------------------------------------------------- */
   initScrollAnimations();
   initNavbar();
@@ -488,4 +636,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initTypingEffect();
   initDividerParallax();
+  initParticles();
+  initCustomCursor();
 });
