@@ -8,38 +8,38 @@
 /* ----------------------------------------------------------------
    0. GOOGLE FONTS IMPORT
    ---------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap");
 
 /* ----------------------------------------------------------------
    1. CSS CUSTOM PROPERTIES (Design Tokens)
    ---------------------------------------------------------------- */
 :root {
   /* Color Palette */
-  --color-cream:        #FFFDF2;
-  --color-black:        #000000;
-  --color-gold:         #C8A96E;
-  --color-dark:         #1a1a1a;
-  --color-warm-light:   #f5e6c8;
+  --color-cream: #fffdf2;
+  --color-black: #000000;
+  --color-gold: #c8a96e;
+  --color-dark: #1a1a1a;
+  --color-warm-light: #f5e6c8;
 
   /* Derived / Utility Colors */
-  --color-gold-rgb:     200, 169, 110;
-  --color-cream-rgb:    255, 253, 242;
+  --color-gold-rgb: 200, 169, 110;
+  --color-cream-rgb: 255, 253, 242;
   --color-border-light: #e0d5c0;
   --color-input-border: #cccccc;
 
   /* Typography */
-  --font-heading:  'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-body:     'EB Garamond', Garamond, 'Times New Roman', serif;
+  --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "EB Garamond", Garamond, "Times New Roman", serif;
 
   /* Layout */
-  --max-width:     1200px;
+  --max-width: 1200px;
   --section-pad-y: 100px;
   --section-pad-x: 24px;
 
   /* Transitions */
-  --ease-smooth:   cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-bounce:   cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ----------------------------------------------------------------
@@ -106,11 +106,15 @@ a {
   transition: color 0.3s var(--ease-smooth);
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -186,7 +190,7 @@ section {
    Using ::after pseudo-elements with ornament character
    ---------------------------------------------------------------- */
 section::after {
-  content: '✦';
+  content: "✦";
   display: block;
   text-align: center;
   font-size: 1rem;
@@ -198,7 +202,7 @@ section::after {
 
 /* Decorative line around ornament */
 section::before {
-  content: '';
+  content: "";
   display: block;
   width: 0;
   height: 0;
@@ -213,7 +217,7 @@ section + section {
 
 /* Ornament line — drawn via a box-shadow trick on the ::after */
 section::after {
-  content: '❧';
+  content: "❧";
   display: block;
   text-align: center;
   font-size: 1.2rem;
@@ -263,7 +267,7 @@ section:last-of-type::after {
 
 /* Small decorative line under section headings */
 .section-heading::after {
-  content: '';
+  content: "";
   display: block;
   width: 60px;
   height: 2px;
@@ -283,8 +287,9 @@ section:last-of-type::after {
   background: rgba(255, 253, 242, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: background 0.4s var(--ease-smooth),
-              box-shadow 0.4s var(--ease-smooth);
+  transition:
+    background 0.4s var(--ease-smooth),
+    box-shadow 0.4s var(--ease-smooth);
   padding: 0 40px;
 }
 
@@ -337,7 +342,7 @@ section:last-of-type::after {
 
 /* Underline draw animation — left to right */
 .nav-links a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -2px;
@@ -381,8 +386,9 @@ section:last-of-type::after {
   height: 2px;
   background: var(--color-black);
   margin: 3px 0;
-  transition: transform 0.3s var(--ease-smooth),
-              opacity 0.3s var(--ease-smooth);
+  transition:
+    transform 0.3s var(--ease-smooth),
+    opacity 0.3s var(--ease-smooth);
   border-radius: 2px;
 }
 
@@ -474,10 +480,11 @@ section:last-of-type::after {
   background: var(--color-cream);
   color: var(--color-black);
   cursor: pointer;
-  transition: background 0.4s var(--ease-smooth),
-              color 0.4s var(--ease-smooth),
-              border-color 0.4s var(--ease-smooth),
-              transform 0.3s var(--ease-smooth);
+  transition:
+    background 0.4s var(--ease-smooth),
+    color 0.4s var(--ease-smooth),
+    border-color 0.4s var(--ease-smooth),
+    transform 0.3s var(--ease-smooth);
   position: relative;
   overflow: hidden;
 }
@@ -508,8 +515,9 @@ section:last-of-type::after {
   height: 40px;
   color: var(--color-gold);
   font-size: 1.3rem;
-  transition: color 0.3s var(--ease-smooth),
-              transform 0.3s var(--ease-smooth);
+  transition:
+    color 0.3s var(--ease-smooth),
+    transform 0.3s var(--ease-smooth);
 }
 
 .social-icons a:hover {
@@ -555,8 +563,9 @@ section:last-of-type::after {
 
 /* Shadow bloom on scroll — JS adds .shadow-bloom class */
 .about-photo.shadow-bloom {
-  box-shadow: 0 15px 50px rgba(200, 169, 110, 0.25),
-              0 5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 15px 50px rgba(200, 169, 110, 0.25),
+    0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* About Text Content */
@@ -593,15 +602,15 @@ section:last-of-type::after {
   border: 1px solid var(--color-border-light);
   padding: 30px;
   position: relative;
-  transition: transform 0.4s var(--ease-smooth),
-              box-shadow 0.4s var(--ease-smooth);
+  transition:
+    transform 0.4s var(--ease-smooth),
+    box-shadow 0.4s var(--ease-smooth);
   /* Parchment texture on cards */
-  background-image:
-    radial-gradient(
-      ellipse at 50% 50%,
-      rgba(200, 169, 110, 0.04) 0%,
-      transparent 70%
-    );
+  background-image: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(200, 169, 110, 0.04) 0%,
+    transparent 70%
+  );
 }
 
 .mv-card:hover {
@@ -647,7 +656,7 @@ section:last-of-type::after {
 }
 
 .btn-view-work::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -694,8 +703,9 @@ section:last-of-type::after {
   grid-template-columns: 300px 1fr;
   border: 1px solid var(--color-border-light);
   overflow: hidden;
-  transition: transform 0.4s var(--ease-smooth),
-              box-shadow 0.4s var(--ease-smooth);
+  transition:
+    transform 0.4s var(--ease-smooth),
+    box-shadow 0.4s var(--ease-smooth);
 }
 
 .exp-card:hover {
@@ -782,7 +792,7 @@ section:last-of-type::after {
 
 /* Custom bullet */
 .exp-card-right ul li::before {
-  content: '▸';
+  content: "▸";
   position: absolute;
   left: 0;
   top: 0;
@@ -825,13 +835,14 @@ section:last-of-type::after {
   grid-template-columns: 300px 1fr;
   border: 1px solid var(--color-border-light);
   overflow: hidden;
-  transition: transform 0.4s var(--ease-smooth),
-              box-shadow 0.5s var(--ease-smooth);
+  transition:
+    transform 0.4s var(--ease-smooth),
+    box-shadow 0.5s var(--ease-smooth);
   position: relative;
 }
 
 .edu-card::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   box-shadow: inset 0 0 0 0 var(--color-gold);
@@ -863,7 +874,7 @@ section:last-of-type::after {
 
 /* Gold decorative corner elements */
 .edu-card-left::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 12px;
   left: 12px;
@@ -874,7 +885,7 @@ section:last-of-type::after {
 }
 
 .edu-card-left::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 12px;
   right: 12px;
@@ -948,7 +959,7 @@ section:last-of-type::after {
 }
 
 .edu-card-right ul li::before {
-  content: '▸';
+  content: "▸";
   position: absolute;
   left: 0;
   top: 0;
@@ -986,8 +997,9 @@ section:last-of-type::after {
   grid-template-columns: 280px 1fr;
   border: 1px solid var(--color-border-light);
   overflow: hidden;
-  transition: transform 0.4s var(--ease-smooth),
-              box-shadow 0.4s var(--ease-smooth);
+  transition:
+    transform 0.4s var(--ease-smooth),
+    box-shadow 0.4s var(--ease-smooth);
 }
 
 .project-card:hover {
@@ -1108,8 +1120,9 @@ section:last-of-type::after {
   border-radius: 20px;
   color: var(--color-gold);
   letter-spacing: 0.5px;
-  transition: background 0.3s var(--ease-smooth),
-              color 0.3s var(--ease-smooth);
+  transition:
+    background 0.3s var(--ease-smooth),
+    color 0.3s var(--ease-smooth);
   /* Shimmer background setup */
   background-image: linear-gradient(
     120deg,
@@ -1151,14 +1164,15 @@ section:last-of-type::after {
   background: var(--color-cream);
   border: 1px solid var(--color-border-light);
   padding: 30px;
-  transition: transform 0.4s var(--ease-smooth),
-              box-shadow 0.4s var(--ease-smooth);
+  transition:
+    transform 0.4s var(--ease-smooth),
+    box-shadow 0.4s var(--ease-smooth);
   position: relative;
   overflow: hidden;
 }
 
 .skill-category::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: rgba(200, 169, 110, 0);
@@ -1276,21 +1290,21 @@ section:last-of-type::after {
   text-align: center;
   position: relative;
   overflow: hidden;
-  transition: transform 0.5s var(--ease-smooth),
-              box-shadow 0.4s var(--ease-smooth),
-              background-color 0.4s var(--ease-smooth);
+  transition:
+    transform 0.5s var(--ease-smooth),
+    box-shadow 0.4s var(--ease-smooth),
+    background-color 0.4s var(--ease-smooth);
   /* Parchment texture */
-  background-image:
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(200, 169, 110, 0.05) 0%,
-      transparent 60%
-    );
+  background-image: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(200, 169, 110, 0.05) 0%,
+    transparent 60%
+  );
 }
 
 /* Scroll / ornament decorative corners */
 .cert-card::before {
-  content: '❦';
+  content: "❦";
   position: absolute;
   top: 10px;
   left: 14px;
@@ -1300,7 +1314,7 @@ section:last-of-type::after {
 }
 
 .cert-card::after {
-  content: '❦';
+  content: "❦";
   position: absolute;
   bottom: 10px;
   right: 14px;
@@ -1320,9 +1334,10 @@ section:last-of-type::after {
 /* Slight initial rotation for visual interest */
 .cert-card {
   transform: rotate(0deg);
-  transition: transform 0.5s var(--ease-smooth),
-              box-shadow 0.4s var(--ease-smooth),
-              background-color 0.4s var(--ease-smooth);
+  transition:
+    transform 0.5s var(--ease-smooth),
+    box-shadow 0.4s var(--ease-smooth),
+    background-color 0.4s var(--ease-smooth);
 }
 
 /* Random rotation on waterfall-in is handled by JS setting initial rotation */
@@ -1430,14 +1445,15 @@ section:last-of-type::after {
   border: 1px solid var(--color-border-light);
   padding: 30px;
   position: relative;
-  transition: transform 0.4s var(--ease-smooth),
-              box-shadow 0.4s var(--ease-smooth);
+  transition:
+    transform 0.4s var(--ease-smooth),
+    box-shadow 0.4s var(--ease-smooth);
   overflow: hidden;
 }
 
 /* Gold border trace on hover */
 .achievement-card::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   box-shadow: inset 0 0 0 0 var(--color-gold);
@@ -1492,8 +1508,8 @@ section:last-of-type::after {
 
 .badge-pill.sports {
   background: rgba(139, 107, 55, 0.12);
-  color: #8B6B37;
-  border: 1px solid #8B6B37;
+  color: #8b6b37;
+  border: 1px solid #8b6b37;
 }
 
 .badge-pill.academic {
@@ -1521,8 +1537,9 @@ section:last-of-type::after {
 }
 
 .achievement-card:hover .trophy-icon {
-  animation: popIn 0.5s var(--ease-bounce) forwards,
-             pulseGlow 1.5s ease-in-out infinite 0.5s;
+  animation:
+    popIn 0.5s var(--ease-bounce) forwards,
+    pulseGlow 1.5s ease-in-out infinite 0.5s;
 }
 
 /* Ken Burns on award images */
@@ -1618,9 +1635,10 @@ section:last-of-type::after {
   font-size: 1rem;
   color: #999;
   pointer-events: none;
-  transition: transform 0.3s var(--ease-smooth),
-              font-size 0.3s var(--ease-smooth),
-              color 0.3s var(--ease-smooth);
+  transition:
+    transform 0.3s var(--ease-smooth),
+    font-size 0.3s var(--ease-smooth),
+    color 0.3s var(--ease-smooth);
 }
 
 .input-group input:focus ~ label,
@@ -1634,7 +1652,7 @@ section:last-of-type::after {
 
 /* Underline draw on focus */
 .input-group::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -1669,7 +1687,7 @@ section:last-of-type::after {
 
 /* Diagonal shimmer sweep on hover */
 .btn-send::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -1799,8 +1817,9 @@ footer .footer-socials {
 footer .footer-socials a {
   color: rgba(255, 253, 242, 0.5);
   font-size: 1.1rem;
-  transition: color 0.3s var(--ease-smooth),
-              transform 0.3s var(--ease-smooth);
+  transition:
+    color 0.3s var(--ease-smooth),
+    transform 0.3s var(--ease-smooth);
 }
 
 footer .footer-socials a:hover {
@@ -1986,7 +2005,8 @@ footer .footer-copy {
 
 /* --- Pulse Glow (gold box-shadow throb) --- */
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 5px rgba(200, 169, 110, 0.3);
   }
   50% {
@@ -2046,7 +2066,8 @@ footer .footer-copy {
 
 /* --- Button Pulse (subtle scale throb) --- */
 @keyframes buttonPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -2057,10 +2078,10 @@ footer .footer-copy {
 /* --- Border Trace (inset gold border grows) --- */
 @keyframes borderTrace {
   0% {
-    box-shadow: inset 0 0 0 0 #C8A96E;
+    box-shadow: inset 0 0 0 0 #c8a96e;
   }
   100% {
-    box-shadow: inset 0 0 0 2px #C8A96E;
+    box-shadow: inset 0 0 0 2px #c8a96e;
   }
 }
 
@@ -2204,18 +2225,42 @@ footer .footer-copy {
 }
 
 /* Stagger helper — nth-child auto-delay (convenience, up to 12) */
-.animate .stagger-item:nth-child(1)  { animation-delay: 0s; }
-.animate .stagger-item:nth-child(2)  { animation-delay: 0.15s; }
-.animate .stagger-item:nth-child(3)  { animation-delay: 0.30s; }
-.animate .stagger-item:nth-child(4)  { animation-delay: 0.45s; }
-.animate .stagger-item:nth-child(5)  { animation-delay: 0.60s; }
-.animate .stagger-item:nth-child(6)  { animation-delay: 0.75s; }
-.animate .stagger-item:nth-child(7)  { animation-delay: 0.90s; }
-.animate .stagger-item:nth-child(8)  { animation-delay: 1.05s; }
-.animate .stagger-item:nth-child(9)  { animation-delay: 1.20s; }
-.animate .stagger-item:nth-child(10) { animation-delay: 1.35s; }
-.animate .stagger-item:nth-child(11) { animation-delay: 1.50s; }
-.animate .stagger-item:nth-child(12) { animation-delay: 1.65s; }
+.animate .stagger-item:nth-child(1) {
+  animation-delay: 0s;
+}
+.animate .stagger-item:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.animate .stagger-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.animate .stagger-item:nth-child(4) {
+  animation-delay: 0.45s;
+}
+.animate .stagger-item:nth-child(5) {
+  animation-delay: 0.6s;
+}
+.animate .stagger-item:nth-child(6) {
+  animation-delay: 0.75s;
+}
+.animate .stagger-item:nth-child(7) {
+  animation-delay: 0.9s;
+}
+.animate .stagger-item:nth-child(8) {
+  animation-delay: 1.05s;
+}
+.animate .stagger-item:nth-child(9) {
+  animation-delay: 1.2s;
+}
+.animate .stagger-item:nth-child(10) {
+  animation-delay: 1.35s;
+}
+.animate .stagger-item:nth-child(11) {
+  animation-delay: 1.5s;
+}
+.animate .stagger-item:nth-child(12) {
+  animation-delay: 1.65s;
+}
 
 /* ================================================================
    19. RESPONSIVE DESIGN
@@ -2225,7 +2270,6 @@ footer .footer-copy {
    TABLET (768px – 1024px)
    -------------------------------- */
 @media (max-width: 1024px) {
-
   :root {
     --section-pad-y: 80px;
   }
@@ -2313,7 +2357,6 @@ footer .footer-copy {
    MOBILE (< 768px)
    -------------------------------- */
 @media (max-width: 768px) {
-
   :root {
     --section-pad-y: 60px;
     --section-pad-x: 18px;
@@ -2559,7 +2602,6 @@ footer .footer-copy {
    SMALL MOBILE (< 480px)
    -------------------------------- */
 @media (max-width: 480px) {
-
   .landing-name {
     font-size: 2rem;
   }
@@ -2715,7 +2757,7 @@ footer .footer-copy {
 }
 
 .section-title::after {
-  content: '';
+  content: "";
   display: block;
   width: 60px;
   height: 2px;
@@ -2803,7 +2845,7 @@ footer .footer-copy {
 }
 
 .section-divider::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2925,7 +2967,9 @@ footer .footer-copy {
 
 /* Hide default cursor on desktop */
 @media (min-width: 769px) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     cursor: none !important;
   }
 }
@@ -2941,7 +2985,10 @@ footer .footer-copy {
   pointer-events: none;
   z-index: 10001;
   transform: translate(-50%, -50%);
-  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+  transition:
+    width 0.2s ease,
+    height 0.2s ease,
+    background 0.2s ease;
 }
 
 .cursor-ring {
@@ -2955,7 +3002,11 @@ footer .footer-copy {
   pointer-events: none;
   z-index: 10000;
   transform: translate(-50%, -50%);
-  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.2s ease;
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    border-color 0.25s ease,
+    background 0.2s ease;
 }
 
 /* Cursor hover states */
@@ -3042,10 +3093,11 @@ footer .footer-copy {
   border-radius: 20px;
   text-decoration: none;
   letter-spacing: 0.5px;
-  transition: background 0.3s var(--ease-smooth),
-              color 0.3s var(--ease-smooth),
-              border-color 0.3s var(--ease-smooth),
-              transform 0.3s var(--ease-smooth);
+  transition:
+    background 0.3s var(--ease-smooth),
+    color 0.3s var(--ease-smooth),
+    border-color 0.3s var(--ease-smooth),
+    transform 0.3s var(--ease-smooth);
 }
 
 .proj-link svg {

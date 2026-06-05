@@ -4,8 +4,7 @@
    Vanilla ES6+ · No external dependencies.
    ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
-
+document.addEventListener("DOMContentLoaded", () => {
   /* -----------------------------------------------------------------------
      UTILITY: Debounce
      Limits how often a function fires (used for scroll handlers).
@@ -31,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
      property based on their index.
      ----------------------------------------------------------------------- */
   const initScrollAnimations = () => {
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    const animatedElements = document.querySelectorAll(".animate-on-scroll");
     if (!animatedElements.length) return;
 
     const scrollObserver = new IntersectionObserver(
@@ -39,17 +38,17 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             // Set stagger delays on children before triggering animation
-            const staggerItems = entry.target.querySelectorAll('.stagger-item');
+            const staggerItems = entry.target.querySelectorAll(".stagger-item");
             staggerItems.forEach((child, index) => {
-              child.style.setProperty('--delay', `${index * 0.15}s`);
+              child.style.setProperty("--delay", `${index * 0.15}s`);
             });
 
-            entry.target.classList.add('animate');
+            entry.target.classList.add("animate");
             observer.unobserve(entry.target); // animate only once
           }
         });
       },
-      { threshold: 0.08, rootMargin: '0px 0px -80px 0px' }
+      { threshold: 0.08, rootMargin: "0px 0px -80px 0px" },
     );
 
     animatedElements.forEach((el) => scrollObserver.observe(el));
@@ -63,11 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
      – Mobile hamburger menu toggle.
      ----------------------------------------------------------------------- */
   const initNavbar = () => {
-    const navbar = document.querySelector('.navbar');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    const hamburger = document.querySelector('.hamburger');
+    const navbar = document.querySelector(".navbar");
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const hamburger = document.querySelector(".hamburger");
     const sections = document.querySelectorAll(
-      '#landing, #about, #experience, #education, #projects, #skills, #certifications, #achievements, #contact'
+      "#landing, #about, #experience, #education, #projects, #skills, #certifications, #achievements, #contact",
     );
 
     if (!navbar) return;
@@ -75,19 +74,21 @@ document.addEventListener('DOMContentLoaded', () => {
     /* --- Scroll class --------------------------------------------------- */
     const handleNavbarScroll = () => {
       if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
+        navbar.classList.add("scrolled");
       } else {
-        navbar.classList.remove('scrolled');
+        navbar.classList.remove("scrolled");
       }
     };
 
-    window.addEventListener('scroll', debounce(handleNavbarScroll, 10), { passive: true });
+    window.addEventListener("scroll", debounce(handleNavbarScroll, 10), {
+      passive: true,
+    });
     handleNavbarScroll(); // set initial state
 
     /* --- Active link highlighting via IntersectionObserver --------------- */
     const activateLink = (id) => {
       navLinks.forEach((link) => {
-        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+        link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
       });
     };
 
@@ -100,38 +101,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       },
       {
-        rootMargin: '-20% 0px -60% 0px', // fires when a section is roughly in the upper‐middle of the viewport
+        rootMargin: "-20% 0px -60% 0px", // fires when a section is roughly in the upper‐middle of the viewport
         threshold: 0,
-      }
+      },
     );
 
     sections.forEach((section) => sectionObserver.observe(section));
 
     /* --- Smooth scroll on nav link click -------------------------------- */
     navLinks.forEach((link) => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href && href.startsWith('#')) {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) {
           e.preventDefault();
           const target = document.querySelector(href);
           if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+            target.scrollIntoView({ behavior: "smooth" });
           }
 
           // Close mobile nav after clicking a link
-          const navLinksEl = document.querySelector('.nav-links');
-          if (navLinksEl) navLinksEl.classList.remove('open');
-          if (hamburger) hamburger.classList.remove('active');
+          const navLinksEl = document.querySelector(".nav-links");
+          if (navLinksEl) navLinksEl.classList.remove("open");
+          if (hamburger) hamburger.classList.remove("active");
         }
       });
     });
 
     /* --- Hamburger toggle ----------------------------------------------- */
     if (hamburger) {
-      const navLinksEl = document.querySelector('.nav-links');
-      hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        if (navLinksEl) navLinksEl.classList.toggle('open');
+      const navLinksEl = document.querySelector(".nav-links");
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        if (navLinksEl) navLinksEl.classList.toggle("open");
       });
     }
   };
@@ -142,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
      percentage label using requestAnimationFrame (~1 500 ms duration).
      ----------------------------------------------------------------------- */
   const initSkillBars = () => {
-    const skillsSection = document.querySelector('#skills');
+    const skillsSection = document.querySelector("#skills");
     if (!skillsSection) return;
 
     let triggered = false;
@@ -153,8 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const start = performance.now();
 
       // Find the associated percentage text (sibling or child of parent)
-      const parentRow = bar.closest('.skill-item') || bar.parentElement.parentElement;
-      const percentLabel = parentRow ? parentRow.querySelector('.skill-percent') : null;
+      const parentRow =
+        bar.closest(".skill-item") || bar.parentElement.parentElement;
+      const percentLabel = parentRow
+        ? parentRow.querySelector(".skill-percent")
+        : null;
 
       const step = (now) => {
         const elapsed = now - start;
@@ -179,13 +183,15 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !triggered) {
             triggered = true;
-            const bars = skillsSection.querySelectorAll('.progress-fill[data-progress]');
+            const bars = skillsSection.querySelectorAll(
+              ".progress-fill[data-progress]",
+            );
             bars.forEach(animateBar);
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     observer.observe(skillsSection);
@@ -196,14 +202,14 @@ document.addEventListener('DOMContentLoaded', () => {
      Counts from 0 → data-count over ~2 000 ms with ease-out.
      ----------------------------------------------------------------------- */
   const initStatCounters = () => {
-    const achievementsSection = document.querySelector('#achievements');
+    const achievementsSection = document.querySelector("#achievements");
     if (!achievementsSection) return;
 
     let triggered = false;
 
     const animateCounter = (el) => {
       const target = parseInt(el.dataset.count, 10) || 0;
-      const suffix = el.dataset.suffix || '';
+      const suffix = el.dataset.suffix || "";
       const duration = 2000;
       const start = performance.now();
 
@@ -229,13 +235,15 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !triggered) {
             triggered = true;
-            const stats = achievementsSection.querySelectorAll('.stat-number[data-count]');
+            const stats = achievementsSection.querySelectorAll(
+              ".stat-number[data-count]",
+            );
             stats.forEach(animateCounter);
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     observer.observe(achievementsSection);
@@ -247,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
      rotation of ±4 degrees. Resets smoothly on mouseleave.
      ----------------------------------------------------------------------- */
   const initTiltCards = () => {
-    const tiltCards = document.querySelectorAll('.tilt-card');
+    const tiltCards = document.querySelectorAll(".tilt-card");
     if (!tiltCards.length) return;
 
     const MAX_TILT = 4; // degrees
@@ -255,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tiltCards.forEach((card) => {
       let rafId = null;
 
-      card.addEventListener('mousemove', (e) => {
+      card.addEventListener("mousemove", (e) => {
         if (rafId) cancelAnimationFrame(rafId);
 
         rafId = requestAnimationFrame(() => {
@@ -276,18 +284,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
 
-      card.addEventListener('mouseleave', () => {
+      card.addEventListener("mouseleave", () => {
         if (rafId) cancelAnimationFrame(rafId);
         // Smooth reset via CSS transition (ensure transition is set in CSS)
-        card.style.transition = 'transform 0.45s cubic-bezier(.25,.8,.25,1)';
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+        card.style.transition = "transform 0.45s cubic-bezier(.25,.8,.25,1)";
+        card.style.transform =
+          "perspective(1000px) rotateX(0deg) rotateY(0deg)";
 
         // Remove inline transition after it completes so mousemove isn't eased
         const onTransitionEnd = () => {
-          card.style.transition = '';
-          card.removeEventListener('transitionend', onTransitionEnd);
+          card.style.transition = "";
+          card.removeEventListener("transitionend", onTransitionEnd);
         };
-        card.addEventListener('transitionend', onTransitionEnd, { once: true });
+        card.addEventListener("transitionend", onTransitionEnd, { once: true });
       });
     });
   };
@@ -299,70 +308,79 @@ document.addEventListener('DOMContentLoaded', () => {
      – Manages floating-label helper classes (.has-value, .focused).
      ----------------------------------------------------------------------- */
   const initContactForm = () => {
-    const form = document.querySelector('#contact-form');
+    const form = document.querySelector("#contact-form");
     if (!form) return;
 
     /* --- Floating labels ------------------------------------------------ */
-    const inputGroups = form.querySelectorAll('.input-group');
+    const inputGroups = form.querySelectorAll(".input-group");
 
     inputGroups.forEach((group) => {
-      const input = group.querySelector('input, textarea');
+      const input = group.querySelector("input, textarea");
       if (!input) return;
 
       // Set initial state (e.g. if browser autofills)
-      if (input.value.trim() !== '') {
-        group.classList.add('has-value');
+      if (input.value.trim() !== "") {
+        group.classList.add("has-value");
       }
 
-      input.addEventListener('focus', () => {
-        group.classList.add('focused');
+      input.addEventListener("focus", () => {
+        group.classList.add("focused");
       });
 
-      input.addEventListener('blur', () => {
-        group.classList.remove('focused');
-        group.classList.toggle('has-value', input.value.trim() !== '');
+      input.addEventListener("blur", () => {
+        group.classList.remove("focused");
+        group.classList.toggle("has-value", input.value.trim() !== "");
       });
 
-      input.addEventListener('input', () => {
-        group.classList.toggle('has-value', input.value.trim() !== '');
+      input.addEventListener("input", () => {
+        group.classList.toggle("has-value", input.value.trim() !== "");
       });
     });
 
     /* --- Validation & submission ---------------------------------------- */
     const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
 
       const name = (form.querySelector('[name="name"]') || {}).value?.trim();
       const email = (form.querySelector('[name="email"]') || {}).value?.trim();
-      const subject = (form.querySelector('[name="subject"]') || {}).value?.trim();
-      const message = (form.querySelector('[name="message"]') || {}).value?.trim();
+      const subject = (
+        form.querySelector('[name="subject"]') || {}
+      ).value?.trim();
+      const message = (
+        form.querySelector('[name="message"]') || {}
+      ).value?.trim();
 
       // Basic validation
       if (!name || !email || !subject || !message) {
-        showFormMessage('Please fill in all fields.', 'error');
+        showFormMessage("Please fill in all fields.", "error");
         return;
       }
 
       if (!isValidEmail(email)) {
-        showFormMessage('Please enter a valid email address.', 'error');
+        showFormMessage("Please enter a valid email address.", "error");
         return;
       }
 
       // Build mailto link
       const mailtoSubject = encodeURIComponent(subject);
-      const mailtoBody = encodeURIComponent(`${message}\n\nFrom: ${name} (${email})`);
+      const mailtoBody = encodeURIComponent(
+        `${message}\n\nFrom: ${name} (${email})`,
+      );
       const mailtoLink = `mailto:guptarishiiitjee@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
 
-      window.open(mailtoLink, '_self');
+      window.open(mailtoLink, "_self");
 
-      showFormMessage('Message ready to send! Your email client should open shortly.', 'success');
+      showFormMessage(
+        "Message ready to send! Your email client should open shortly.",
+        "success",
+      );
       form.reset();
 
       // Reset floating-label classes
       inputGroups.forEach((group) => {
-        group.classList.remove('has-value', 'focused');
+        group.classList.remove("has-value", "focused");
       });
     });
 
@@ -371,20 +389,20 @@ document.addEventListener('DOMContentLoaded', () => {
      * @param {string} text  – The message to display.
      * @param {string} type  – 'success' or 'error'.
      */
-    const showFormMessage = (text, type = 'success') => {
+    const showFormMessage = (text, type = "success") => {
       // Remove any existing message
-      const existing = form.parentElement.querySelector('.form-message');
+      const existing = form.parentElement.querySelector(".form-message");
       if (existing) existing.remove();
 
-      const msg = document.createElement('p');
+      const msg = document.createElement("p");
       msg.className = `form-message form-message--${type}`;
       msg.textContent = text;
       form.parentElement.appendChild(msg);
 
       // Auto-remove after 4 seconds
       setTimeout(() => {
-        msg.style.opacity = '0';
-        msg.style.transition = 'opacity 0.4s ease';
+        msg.style.opacity = "0";
+        msg.style.transition = "opacity 0.4s ease";
         setTimeout(() => msg.remove(), 400);
       }, 4000);
     };
@@ -395,24 +413,26 @@ document.addEventListener('DOMContentLoaded', () => {
      Shows the button when scrolled past 500 px, smooth-scrolls on click.
      ----------------------------------------------------------------------- */
   const initBackToTop = () => {
-    const btn = document.querySelector('.back-to-top');
+    const btn = document.querySelector(".back-to-top");
     if (!btn) return;
 
     const toggleVisibility = () => {
       if (window.scrollY > 500) {
-        btn.style.opacity = '1';
-        btn.style.pointerEvents = 'auto';
+        btn.style.opacity = "1";
+        btn.style.pointerEvents = "auto";
       } else {
-        btn.style.opacity = '0';
-        btn.style.pointerEvents = 'none';
+        btn.style.opacity = "0";
+        btn.style.pointerEvents = "none";
       }
     };
 
-    window.addEventListener('scroll', debounce(toggleVisibility, 10), { passive: true });
+    window.addEventListener("scroll", debounce(toggleVisibility, 10), {
+      passive: true,
+    });
     toggleVisibility(); // initial state
 
-    btn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   };
 
@@ -422,21 +442,21 @@ document.addEventListener('DOMContentLoaded', () => {
      cursor, then replaces itself with static text.
      ----------------------------------------------------------------------- */
   const initTypingEffect = () => {
-    const el = document.querySelector('.typing-text');
+    const el = document.querySelector(".typing-text");
     if (!el) return;
 
     const designations = el.dataset.designations
-      ? el.dataset.designations.split('|')
-      : el.textContent.split(' · ');
+      ? el.dataset.designations.split("|")
+      : el.textContent.split(" · ");
 
     // Preserve the full static text for when the animation finishes
-    const fullText = designations.join(' · ');
-    el.textContent = '';
+    const fullText = designations.join(" · ");
+    el.textContent = "";
 
-    const SPEED = 80;          // ms per character
-    const CURSOR = '▎';       // blinking cursor character
+    const SPEED = 50; // ms per character
+    const CURSOR = "▎"; // blinking cursor character
     let charIndex = 0;
-    let buffer = '';
+    let buffer = "";
 
     const typeNext = () => {
       if (charIndex < fullText.length) {
@@ -460,7 +480,9 @@ document.addEventListener('DOMContentLoaded', () => {
      depth effect.
      ----------------------------------------------------------------------- */
   const initDividerParallax = () => {
-    const dividers = document.querySelectorAll('.section-divider, .divider-ornament');
+    const dividers = document.querySelectorAll(
+      ".section-divider, .divider-ornament",
+    );
     if (!dividers.length) return;
 
     const handleParallax = () => {
@@ -472,7 +494,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
 
-    window.addEventListener('scroll', debounce(handleParallax, 10), { passive: true });
+    window.addEventListener("scroll", debounce(handleParallax, 10), {
+      passive: true,
+    });
     handleParallax(); // initial
   };
 
@@ -481,15 +505,16 @@ document.addEventListener('DOMContentLoaded', () => {
      Fine gold particles that drift and react to cursor movement.
      ----------------------------------------------------------------------- */
   const initParticles = () => {
-    const canvas = document.getElementById('particle-canvas');
+    const canvas = document.getElementById("particle-canvas");
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const landing = document.getElementById('landing');
+    const ctx = canvas.getContext("2d");
+    const landing = document.getElementById("landing");
 
     let width, height;
-    let mouseX = -9999, mouseY = -9999;
-    const PARTICLE_COUNT = 80;
-    const CONNECTION_DIST = 120;
+    let mouseX = -9999,
+      mouseY = -9999;
+    const PARTICLE_COUNT = 250;
+    const CONNECTION_DIST = 250;
     const MOUSE_RADIUS = 150;
     const particles = [];
 
@@ -500,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
       canvas.height = height;
     };
     resize();
-    window.addEventListener('resize', debounce(resize, 100));
+    window.addEventListener("resize", debounce(resize, 100));
 
     class Particle {
       constructor() {
@@ -517,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dy = this.y - mouseY;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < MOUSE_RADIUS && dist > 0) {
-          const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.8;
+          const force = ((MOUSE_RADIUS - dist) / MOUSE_RADIUS) * 0.8;
           this.vx += (dx / dist) * force;
           this.vy += (dy / dist) * force;
         }
@@ -563,19 +588,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
-      particles.forEach(p => { p.update(); p.draw(); });
+      particles.forEach((p) => {
+        p.update();
+        p.draw();
+      });
       drawConnections();
       requestAnimationFrame(animate);
     };
     animate();
 
     // Track mouse relative to landing section
-    landing.addEventListener('mousemove', (e) => {
+    landing.addEventListener("mousemove", (e) => {
       const rect = landing.getBoundingClientRect();
       mouseX = e.clientX - rect.left;
       mouseY = e.clientY - rect.top;
     });
-    landing.addEventListener('mouseleave', () => {
+    landing.addEventListener("mouseleave", () => {
       mouseX = -9999;
       mouseY = -9999;
     });
@@ -587,14 +615,17 @@ document.addEventListener('DOMContentLoaded', () => {
      Expands on interactive element hover.
      ----------------------------------------------------------------------- */
   const initCustomCursor = () => {
-    const dot = document.getElementById('cursor-dot');
-    const ring = document.getElementById('cursor-ring');
-    if (!dot || !ring || window.matchMedia('(max-width: 768px)').matches) return;
+    const dot = document.getElementById("cursor-dot");
+    const ring = document.getElementById("cursor-ring");
+    if (!dot || !ring || window.matchMedia("(max-width: 768px)").matches)
+      return;
 
-    let mx = 0, my = 0; // actual mouse
-    let rx = 0, ry = 0; // ring position (lagged)
+    let mx = 0,
+      my = 0; // actual mouse
+    let rx = 0,
+      ry = 0; // ring position (lagged)
 
-    document.addEventListener('mousemove', (e) => {
+    document.addEventListener("mousemove", (e) => {
       mx = e.clientX;
       my = e.clientY;
       dot.style.left = `${mx}px`;
@@ -611,15 +642,16 @@ document.addEventListener('DOMContentLoaded', () => {
     lagRing();
 
     // Hover detection
-    const interactiveSelector = 'a, button, .btn-cta, .btn-send, .proj-link, .tech-pill, .nav-links a, .hamburger, input, textarea, .cert-card, .social-icons a';
-    document.querySelectorAll(interactiveSelector).forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        dot.classList.add('hovering');
-        ring.classList.add('hovering');
+    const interactiveSelector =
+      "a, button, .btn-cta, .btn-send, .proj-link, .tech-pill, .nav-links a, .hamburger, input, textarea, .cert-card, .social-icons a";
+    document.querySelectorAll(interactiveSelector).forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        dot.classList.add("hovering");
+        ring.classList.add("hovering");
       });
-      el.addEventListener('mouseleave', () => {
-        dot.classList.remove('hovering');
-        ring.classList.remove('hovering');
+      el.addEventListener("mouseleave", () => {
+        dot.classList.remove("hovering");
+        ring.classList.remove("hovering");
       });
     });
   };
